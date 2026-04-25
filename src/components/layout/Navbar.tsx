@@ -35,34 +35,29 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-18 py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
+          <a href="https://www.nexithai.com/" className="flex items-center space-x-3 group">
             <img src={nexithLogo} alt="Nexith AI" className="h-10 w-auto dark:brightness-100 brightness-0" />
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
-                to={link.path}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  isActive(link.path)
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                }`}
+                href={`https://www.nexithai.com${link.path}`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-muted`}
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
             
-            {/* Programs Dropdown */}
             <div 
               className="relative"
               onMouseEnter={() => setIsProgramsOpen(true)}
               onMouseLeave={() => setIsProgramsOpen(false)}
             >
-              <Link
-                to="/programs"
+              <a
+                href="https://www.nexithai.com/programs"
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-1 ${
                   isProgramsActive
                     ? "text-primary bg-primary/10"
@@ -71,15 +66,15 @@ const Navbar = () => {
               >
                 Programs
                 <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isProgramsOpen ? "rotate-180" : ""}`} />
-              </Link>
+              </a>
               
               {/* Dropdown Menu */}
               {isProgramsOpen && (
                 <div className="absolute top-full left-0 pt-2 z-50">
                   <div className="bg-card border border-border/50 rounded-xl shadow-xl p-2 min-w-[280px] animate-fade-in">
                     <div className="py-1">
-                      <Link
-                        to="/programs"
+                      <a
+                        href="https://www.nexithai.com/programs"
                         className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-muted transition-colors group"
                       >
                         <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
@@ -89,14 +84,14 @@ const Navbar = () => {
                           <p className="font-medium text-foreground group-hover:text-primary transition-colors">All Programs</p>
                           <p className="text-xs text-muted-foreground">View all our programs</p>
                         </div>
-                      </Link>
+                      </a>
                       
                       <div className="h-px bg-border/50 my-2" />
                       
                       {programs.map((program) => (
-                        <Link
+                        <a
                           key={program.id}
-                          to={`/programs/${program.id}`}
+                          href={`https://www.nexithai.com/programs/${program.id}`}
                           className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-muted transition-colors group"
                         >
                           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">
@@ -106,7 +101,7 @@ const Navbar = () => {
                             <p className="font-medium text-foreground group-hover:text-primary transition-colors text-sm">{program.title}</p>
                             <p className="text-xs text-muted-foreground">{program.duration} • {program.level}</p>
                           </div>
-                        </Link>
+                        </a>
                       ))}
                     </div>
                   </div>
