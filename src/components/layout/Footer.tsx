@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 import NewsletterForm from "@/components/forms/NewsletterForm";
-import nexithLogo from "@/assets/nexith-ai-logo.png";
+import { Logo } from "@/components/ui/Logo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,8 +15,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="space-y-5">
-            <a href="https://www.nexithai.com/" className="flex items-center space-x-3 group">
-              <img src={nexithLogo} alt="Nexith AI" className="h-10 w-auto brightness-100" />
+            <a href="https://www.nexithai.com/" className="group inline-block">
+              <Logo className="transition-transform duration-300 group-hover:scale-[1.02]" />
             </a>
             <p className="text-background/70 text-sm leading-relaxed">
               Empowering 100,000 African youth with AI literacy and skills for a technology-driven future by 2030.

@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { programs } from "@/lib/programs-data";
-import nexithLogo from "@/assets/nexith-ai-logo.png";
+import { Logo } from "@/components/ui/Logo";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,8 +35,8 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-18 py-4">
           {/* Logo */}
-          <a href="https://www.nexithai.com/" className="flex items-center space-x-3 group">
-            <img src={nexithLogo} alt="Nexith AI" className="h-10 w-auto dark:brightness-100 brightness-0" />
+          <a href="https://www.nexithai.com/" className="group">
+            <Logo className="transition-transform duration-300 group-hover:scale-[1.02]" />
           </a>
 
           {/* Desktop Navigation */}
