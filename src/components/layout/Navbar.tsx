@@ -150,39 +150,35 @@ const Navbar = () => {
             <div className="container mx-auto px-4 py-4">
               <div className="flex flex-col space-y-1">
                 {navLinks.map((link) => (
-                  <Link
+                  <a
                     key={link.name}
-                    to={link.path}
+                    href={`https://www.nexithai.com${link.path}`}
                     onClick={() => setIsOpen(false)}
-                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                      isActive(link.path)
-                        ? "text-primary bg-primary/10"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                    }`}
+                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-muted`}
                   >
                     {link.name}
-                  </Link>
+                  </a>
                 ))}
                 
                 {/* Mobile Programs Section */}
                 <div className="px-4 py-3 bg-muted/30 rounded-lg">
-                  <Link
-                    to="/programs"
+                  <a
+                    href="https://www.nexithai.com/programs"
                     onClick={() => setIsOpen(false)}
                     className={`block font-medium mb-3 ${isProgramsActive ? "text-primary" : "text-foreground"}`}
                   >
                     Programs
-                  </Link>
+                  </a>
                   <div className="pl-4 space-y-1 border-l-2 border-primary/30">
                     {programs.map((program) => (
-                      <Link
+                      <a
                         key={program.id}
-                        to={`/programs/${program.id}`}
+                        href={`https://www.nexithai.com/programs/${program.id}`}
                         onClick={() => setIsOpen(false)}
                         className="block py-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
                         {program.title}
-                      </Link>
+                      </a>
                     ))}
                   </div>
                 </div>

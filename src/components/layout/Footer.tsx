@@ -15,9 +15,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="space-y-5">
-            <Link to="/" className="flex items-center space-x-3 group">
+            <a href="https://www.nexithai.com/" className="flex items-center space-x-3 group">
               <img src={nexithLogo} alt="Nexith AI" className="h-10 w-auto brightness-100" />
-            </Link>
+            </a>
             <p className="text-background/70 text-sm leading-relaxed">
               Empowering 100,000 African youth with AI literacy and skills for a technology-driven future by 2030.
             </p>
@@ -42,28 +42,28 @@ const Footer = () => {
             <h3 className="font-semibold text-lg mb-5">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
+                <a href="https://www.nexithai.com/" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
                   Home
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/about" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
+                <a href="https://www.nexithai.com/about" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
                   About Us
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/contact" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
+                <a href="https://www.nexithai.com/contact" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
                   Contact
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/programs" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
+                <a href="https://www.nexithai.com/programs" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
                   Programs
-                </Link>
+                </a>
               </li>
               <li>
                 <a href="https://scholarship.nexithai.com" target="_blank" rel="noopener noreferrer" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
@@ -72,10 +72,10 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <Link to="/blog" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
+                <a href="https://www.nexithai.com/blog" className="text-background/70 hover:text-primary transition-colors text-sm flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
                   Blog
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -120,8 +120,8 @@ const Footer = () => {
             © {currentYear} Nexith AI Academy. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link to="/terms" className="text-background/40 hover:text-background/70 text-xs transition-colors">Terms of Service</Link>
-            <Link to="/privacy" className="text-background/40 hover:text-background/70 text-xs transition-colors">Privacy Policy</Link>
+            <a href="https://www.nexithai.com/terms" className="text-background/40 hover:text-background/70 text-xs transition-colors">Terms of Service</a>
+            <a href="https://www.nexithai.com/privacy" className="text-background/40 hover:text-background/70 text-xs transition-colors">Privacy Policy</a>
           </div>
           <p className="text-background/40 text-xs">
             Democratizing AI Education Across Africa
