@@ -280,9 +280,25 @@ const Scholarship = () => {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full gradient-primary hover:opacity-90" disabled={isLoading}>
-                  {isLoading ? "Submitting..." : "Submit Application"}
-                </Button>
+                {(() => {
+                  const isFormValid = 
+                    formData.firstName.trim() !== "" &&
+                    formData.lastName.trim() !== "" &&
+                    formData.email.trim() !== "" &&
+                    formData.selectedCourse !== "" &&
+                    formData.whyAI.trim() !== "" &&
+                    formData.goals.trim() !== "";
+
+                  return (
+                    <Button
+                      type="submit"
+                      className="w-full gradient-primary hover:opacity-90"
+                      disabled={isLoading || !isFormValid}
+                    >
+                      {isLoading ? "Submitting..." : "Submit Application"}
+                    </Button>
+                  );
+                })()}
               </form>
             </CardContent>
           </Card>
