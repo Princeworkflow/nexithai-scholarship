@@ -90,7 +90,7 @@ const Scholarship = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://growifysolutions.app.n8n.cloud/webhook-test/62a4ae34-827a-463f-85e1-88c7b59d9c7a", {
+      const response = await fetch("https://growifysolutions.app.n8n.cloud/webhook/62a4ae34-827a-463f-85e1-88c7b59d9c7a", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
