@@ -89,8 +89,19 @@ const Scholarship = () => {
 
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const response = await fetch("https://growifysolutions.app.n8n.cloud/webhook-test/62a4ae34-827a-463f-85e1-88c7b59d9c7a", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...formData, courseName: getSelectedCourseName() }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit application");
+      }
+
       setIsSubmitted(true);
 
       // Fire Meta Pixel CompleteRegistration — only on successful submission
@@ -106,7 +117,15 @@ const Scholarship = () => {
       setTimeout(() => {
         navigate("/");
       }, 4000);
-    }, 1500);
+    } catch (error) {
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your application. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Success Screen
