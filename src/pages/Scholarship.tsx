@@ -10,6 +10,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle, GraduationCap, Users, Award, Sparkles } from "lucide-react";
 
+declare global {
+  interface Window {
+    fbq: (...args: unknown[]) => void;
+  }
+}
+
 const courses = [
   { value: "ai-automation", label: "AI Automation", description: "n8n, Make.com, GoHighLevel, Zapier" },
   { value: "ai-business", label: "AI for Business", description: "Marketing, Operations, Content Creation, Personal Branding" },
@@ -42,7 +48,7 @@ const Scholarship = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -70,7 +76,7 @@ const Scholarship = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate required fields
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.selectedCourse || !formData.whyAI || !formData.goals) {
       toast({
@@ -82,12 +88,20 @@ const Scholarship = () => {
     }
 
     setIsLoading(true);
-    
-    // TODO: Connect to Supabase when Cloud is enabled
+
     setTimeout(() => {
       setIsLoading(false);
       setIsSubmitted(true);
-      
+
+      // Fire Meta Pixel CompleteRegistration — only on successful submission
+      if (typeof window.fbq !== "undefined") {
+        window.fbq("track", "CompleteRegistration", {
+          content_name: getSelectedCourseName(),
+          currency: "NGN",
+          status: true,
+        });
+      }
+
       // Redirect to home after 4 seconds
       setTimeout(() => {
         navigate("/");
@@ -153,7 +167,7 @@ const Scholarship = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-6">
             {benefits.map((benefit, index) => (
-              <div 
+              <div
                 key={index}
                 className="text-center p-6 rounded-2xl bg-card border border-border/50"
               >
@@ -182,7 +196,7 @@ const Scholarship = () => {
                 Fill in all required fields to submit your application
               </CardDescription>
             </CardHeader>
-            
+
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Personal Information */}
@@ -193,56 +207,25 @@ const Scholarship = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName">First Name *</Label>
-                      <Input
-                        id="firstName"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        placeholder="John"
-                      />
+                      <Input id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="John" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName">Last Name *</Label>
-                      <Input
-                        id="lastName"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        placeholder="Doe"
-                      />
+                      <Input id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Doe" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="john@example.com"
-                    />
+                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" />
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone Number</Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+234 800 000 0000"
-                      />
+                      <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="+234 800 000 0000" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="country">Country</Label>
-                      <Input
-                        id="country"
-                        name="country"
-                        value={formData.country}
-                        onChange={handleChange}
-                        placeholder="Nigeria"
-                      />
+                      <Input id="country" name="country" value={formData.country} onChange={handleChange} placeholder="Nigeria" />
                     </div>
                   </div>
                 </div>
@@ -254,10 +237,7 @@ const Scholarship = () => {
                   </h3>
                   <div className="space-y-2">
                     <Label htmlFor="selectedCourse">Select Course *</Label>
-                    <Select
-                      value={formData.selectedCourse}
-                      onValueChange={(value) => handleSelectChange("selectedCourse", value)}
-                    >
+                    <Select value={formData.selectedCourse} onValueChange={(value) => handleSelectChange("selectedCourse", value)}>
                       <SelectTrigger>
                         <SelectValue placeholder="Choose the course you want to enroll in" />
                       </SelectTrigger>
@@ -270,12 +250,10 @@ const Scholarship = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  
+
                   {formData.selectedCourse && (
                     <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
-                      <h4 className="font-semibold text-foreground mb-1">
-                        {getSelectedCourseName()}
-                      </h4>
+                      <h4 className="font-semibold text-foreground mb-1">{getSelectedCourseName()}</h4>
                       <p className="text-sm text-muted-foreground">
                         {courses.find(c => c.value === formData.selectedCourse)?.description}
                       </p>
@@ -290,44 +268,19 @@ const Scholarship = () => {
                   </h3>
                   <div className="space-y-2">
                     <Label htmlFor="whyAI">Why do you want to learn AI? *</Label>
-                    <Textarea
-                      id="whyAI"
-                      name="whyAI"
-                      value={formData.whyAI}
-                      onChange={handleChange}
-                      placeholder="Share your motivation for learning artificial intelligence..."
-                      rows={4}
-                    />
+                    <Textarea id="whyAI" name="whyAI" value={formData.whyAI} onChange={handleChange} placeholder="Share your motivation for learning artificial intelligence..." rows={4} />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="goals">What are your career goals? *</Label>
-                    <Textarea
-                      id="goals"
-                      name="goals"
-                      value={formData.goals}
-                      onChange={handleChange}
-                      placeholder="Describe your short and long-term career goals..."
-                      rows={4}
-                    />
+                    <Textarea id="goals" name="goals" value={formData.goals} onChange={handleChange} placeholder="Describe your short and long-term career goals..." rows={4} />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="experience">Prior experience with AI/Programming</Label>
-                    <Textarea
-                      id="experience"
-                      name="experience"
-                      value={formData.experience}
-                      onChange={handleChange}
-                      placeholder="Share any relevant experience (optional)..."
-                      rows={3}
-                    />
+                    <Textarea id="experience" name="experience" value={formData.experience} onChange={handleChange} placeholder="Share any relevant experience (optional)..." rows={3} />
                   </div>
                 </div>
 
-                <Button 
-                  type="submit"
-                  className="w-full gradient-primary hover:opacity-90"
-                  disabled={isLoading}
-                >
+                <Button type="submit" className="w-full gradient-primary hover:opacity-90" disabled={isLoading}>
                   {isLoading ? "Submitting..." : "Submit Application"}
                 </Button>
               </form>
