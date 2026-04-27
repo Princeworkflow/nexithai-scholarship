@@ -57,8 +57,7 @@ const Scholarship = () => {
     country: "",
     selectedCourse: "",
     whyAI: "",
-    goals: "",
-    experience: "",
+    commitmentFee: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -78,7 +77,7 @@ const Scholarship = () => {
     e.preventDefault();
 
     // Validate required fields
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.selectedCourse || !formData.whyAI || !formData.goals) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.selectedCourse || !formData.whyAI || !formData.commitmentFee) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields",
@@ -283,19 +282,23 @@ const Scholarship = () => {
                 {/* Motivation */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-foreground border-b border-border pb-2">
-                    Motivation & Goals
+                    Motivation & Commitment
                   </h3>
                   <div className="space-y-2">
                     <Label htmlFor="whyAI">Why do you want to learn AI? *</Label>
                     <Textarea id="whyAI" name="whyAI" value={formData.whyAI} onChange={handleChange} placeholder="Share your motivation for learning artificial intelligence..." rows={4} />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="goals">What are your career goals? *</Label>
-                    <Textarea id="goals" name="goals" value={formData.goals} onChange={handleChange} placeholder="Describe your short and long-term career goals..." rows={4} />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="experience">Prior experience with AI/Programming</Label>
-                    <Textarea id="experience" name="experience" value={formData.experience} onChange={handleChange} placeholder="Share any relevant experience (optional)..." rows={3} />
+                    <Label htmlFor="commitmentFee">To ensure commitment, shortlisted applicants are required to pay a token application fee. Are you willing to proceed? *</Label>
+                    <Select value={formData.commitmentFee} onValueChange={(value) => handleSelectChange("commitmentFee", value)}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Yes, I am willing to proceed">Yes, I am willing to proceed</SelectItem>
+                        <SelectItem value="No, I am not willing">No, I am not willing</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
 
@@ -306,7 +309,7 @@ const Scholarship = () => {
                     formData.email.trim() !== "" &&
                     formData.selectedCourse !== "" &&
                     formData.whyAI.trim() !== "" &&
-                    formData.goals.trim() !== "";
+                    formData.commitmentFee !== "";
 
                   return (
                     <Button
