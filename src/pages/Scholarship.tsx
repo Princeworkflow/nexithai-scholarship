@@ -51,13 +51,10 @@ const Scholarship = () => {
 
   const [formData, setFormData] = useState({
     firstName: "",
-    lastName: "",
     email: "",
     phone: "",
-    country: "",
     selectedCourse: "",
     whyAI: "",
-    commitmentFee: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -77,7 +74,7 @@ const Scholarship = () => {
     e.preventDefault();
 
     // Validate required fields
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.selectedCourse || !formData.whyAI || !formData.commitmentFee) {
+    if (!formData.firstName || !formData.email || !formData.selectedCourse || !formData.whyAI) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields",
@@ -222,29 +219,17 @@ const Scholarship = () => {
                   <h3 className="text-lg font-semibold text-foreground border-b border-border pb-2">
                     Personal Information
                   </h3>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name *</Label>
-                      <Input id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="John" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name *</Label>
-                      <Input id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Doe" />
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name *</Label>
+                    <Input id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="John" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email *</Label>
                     <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" />
                   </div>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="+234 800 000 0000" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="country">Country</Label>
-                      <Input id="country" name="country" value={formData.country} onChange={handleChange} placeholder="Nigeria" />
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="+234 800 000 0000" />
                   </div>
                 </div>
 
@@ -282,34 +267,20 @@ const Scholarship = () => {
                 {/* Motivation */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-foreground border-b border-border pb-2">
-                    Motivation & Commitment
+                    Motivation
                   </h3>
                   <div className="space-y-2">
                     <Label htmlFor="whyAI">Why do you want to learn AI? *</Label>
                     <Textarea id="whyAI" name="whyAI" value={formData.whyAI} onChange={handleChange} placeholder="Share your motivation for learning artificial intelligence..." rows={4} />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="commitmentFee">To ensure commitment, shortlisted applicants are required to pay a token application fee. Are you willing to proceed? *</Label>
-                    <Select value={formData.commitmentFee} onValueChange={(value) => handleSelectChange("commitmentFee", value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select an option" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Yes, I am willing to proceed">Yes, I am willing to proceed</SelectItem>
-                        <SelectItem value="No, I am not willing">No, I am not willing</SelectItem>
-                      </SelectContent>
-                    </Select>
                   </div>
                 </div>
 
                 {(() => {
                   const isFormValid = 
                     formData.firstName.trim() !== "" &&
-                    formData.lastName.trim() !== "" &&
                     formData.email.trim() !== "" &&
                     formData.selectedCourse !== "" &&
-                    formData.whyAI.trim() !== "" &&
-                    formData.commitmentFee !== "";
+                    formData.whyAI.trim() !== "";
 
                   return (
                     <Button
