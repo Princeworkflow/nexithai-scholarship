@@ -86,7 +86,7 @@ const Scholarship = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://nexith.app.n8n.cloud/webhook-test/6e73ac14-52e1-4aaf-9893-aef581e38118", {
+      const response = await fetch("https://nexith.app.n8n.cloud/webhook/6e73ac14-52e1-4aaf-9893-aef581e38118", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
