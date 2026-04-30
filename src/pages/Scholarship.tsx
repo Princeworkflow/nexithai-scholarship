@@ -85,43 +85,19 @@ const Scholarship = () => {
 
     setIsLoading(true);
 
-    try {
-      const response = await fetch("https://nexith.app.n8n.cloud/webhook/6e73ac14-52e1-4aaf-9893-aef581e38118", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...formData, courseName: getSelectedCourseName() }),
+    // Fire Meta Pixel CompleteRegistration
+    if (typeof window.fbq !== "undefined") {
+      window.fbq("track", "CompleteRegistration", {
+        content_name: getSelectedCourseName(),
+        currency: "NGN",
+        status: true,
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to submit application");
-      }
-
-      setIsSubmitted(true);
-
-      // Fire Meta Pixel CompleteRegistration — only on successful submission
-      if (typeof window.fbq !== "undefined") {
-        window.fbq("track", "CompleteRegistration", {
-          content_name: getSelectedCourseName(),
-          currency: "NGN",
-          status: true,
-        });
-      }
-
-      // Redirect to home after 4 seconds
-      setTimeout(() => {
-        navigate("/");
-      }, 4000);
-    } catch (error) {
-      toast({
-        title: "Submission Failed",
-        description: "There was an error submitting your application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
     }
+
+    // Redirect to Google Form
+    setTimeout(() => {
+      window.location.href = "https://forms.gle/amYvGZTG8yJrhnUJA";
+    }, 500);
   };
 
   // Success Screen
